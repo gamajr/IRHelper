@@ -1,0 +1,45 @@
+<%- include('./includes/head.ejs') %>
+<header>
+    <%- include('./includes/navbar.ejs') %>
+</header>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6"><h1>Ativos</h1></div>
+            
+        </div>
+        <% if (assets.length > 0) { %>
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Ticker</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Ações</th>
+                    <th scope="col">Preço Médio</th>
+                    <th scope="col">Preço Atual</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let asset of assets) { %>
+                <tr class="table-active">
+                    <input type="hidden" name="assetId" value="asset._id">
+                    <th scope="row"><%= asset.ticker%></th>
+                    <td><%= asset.publicName%></td>
+                    <td><%= asset.quantity%></td>
+                    <td><%= asset.meanPrice.toFixed(2)%></td>
+                    <td><%= asset.marketPrice.toFixed(2)%></td>
+                    <td><a class="btn btn-success" href="/edit-asset/<%= asset._id %>">Editar</a>
+                    <td><a class="btn btn-warning" href="/asset-detail/<%= asset._id %>">Detalhes</a></td>
+                    </td>
+                    
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <h5>Sem ativos cadastrados</h5>
+        <% } %>
+    </div>
+<%- include('./includes/tail.ejs') %>

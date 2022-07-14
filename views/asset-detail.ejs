@@ -1,0 +1,126 @@
+<%- include('./includes/head.ejs') %>
+<header>
+    <%- include('./includes/navbar.ejs') %>
+</header>
+<body>
+    <div class="container px-4">
+        <div class="row">
+            <div class="col-3">
+                <h1><%= asset.ticker %></h1>               
+            </div>
+            <div class="col-3">
+                <h1><%= asset.quantity %></h1>
+            </div>
+            <div class="col-3">
+                <h1><%= asset.publicName %></h1>
+            </div>
+            <div class="col-3">
+                <div class="row"><h6><%= situation %></h6></div>
+                <div class="row"><h5>R$<%= variation.toFixed(2) %></h5></div>
+            </div>
+        </div>
+        <br>
+        <div class="row gx-5">
+            <div class="col border bg-light p-3">
+                <div class="row"><h5>Preço Atual:</h5></div>
+                <div class="row"><h3>R$<%= asset.marketPrice.toFixed(2) %></h3></div>
+            </div>
+            <div class="col border bg-light p-3">
+                <div class="row"><h5>Preço Médio:</h5></div>
+                <div class="row"><h3>R$<%= asset.meanPrice.toFixed(2) %></h3></div>
+            </div>
+        </div>
+        <div class="row gx-5">
+            <div class="col border bg-light p-3">
+                <div class="row"><h5>Valor em Carteira:</h5></div>
+                <div class="row"><h3>R$<%= totalValue.toFixed(2) %></h3></div>
+            </div>
+            <div class="col border bg-light p-3">
+                <div class="row"><h5>Valor de Compra:</h5></div>
+                <div class="row"><h3>R$<%= buyValue.toFixed(2) %></h3></div>
+            </div>
+        </div>
+        <br>        
+        
+        <br>       
+
+        <div class="row">
+            <div class="col-3">
+                <h4>Compras</h4>
+            </div>           
+        </div>
+           
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Qtde</th>
+                    <th scope="col">Preço</th>       
+                    <th scope="col" ></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let buy of asset.buys) { %> 
+                
+                <tr class="table-active">
+                    <form action="/remove-buy/<%= buy._id%>" method="post">
+                    <input type="hidden" name="assetId" value="<%= asset._id%>">    
+                    <input type="hidden" name="buyId" value="<%= buy._id%>">
+                    <td><%= buy.date %></td>
+                    <td><%= buy.quantity %></td>
+                    <td><%= buy.price.toFixed(2) %></td>
+                    <td><button class="btn btn-warning" type="submit">Apagar</button></td>                                              
+                    </form>                    
+                </tr>
+                <% } %>
+            </tbody>
+        </table>        
+        <div class="row">
+            <div class="col-3">
+                <a class="btn btn-success" href="/add-buy/<%= asset._id%>">Adicionar Compra</a>                
+            </div>       
+        </div>
+        <br>        
+        <div class="row">
+            <div class="col-3">
+                <h4>Vendas</h4>
+            </div>            
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Qtde</th>
+                    <th scope="col">Preço</th>                
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let sell of asset.sells) { %> 
+                
+                <tr class="table-active">
+                    <form action="/remove-sell/<%= sell._id%>" method="post">
+                    <input type="hidden" name="assetId" value="<%= asset._id%>">    
+                    <input type="hidden" name="sellId" value="<%= sell._id%>">
+                    <td><%= sell.date %></td>
+                    <td><%= sell.quantity %></td>
+                    <td><%= sell.price.toFixed(2) %></td>
+                    <td><button class="btn btn-warning" type="submit">Apagar</button></td>                                              
+                    </form>                    
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-3">
+                <a class="btn btn-success" href="/add-sell/<%= asset._id%>">Adicionar Venda</a>                
+            </div>       
+        </div>
+
+
+    </div>
+    
+
+
+<%- include('./includes/tail.ejs') %>

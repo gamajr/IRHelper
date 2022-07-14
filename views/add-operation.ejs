@@ -1,0 +1,54 @@
+<%- include('./includes/head.ejs') %>
+<header>
+    <%- include('./includes/navbar.ejs') %>
+</header>
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h2><%= asset.publicName %></h2>
+        </div>
+        <div class="col-md-4 col-md-offset-4">
+            <h5>Incluir <% if(operation=='buy') { %>Compra<% } else { %>Venda<% }%></h5>    
+        </div>        
+        <div class="col-md-4 col-md-offset-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4"></div>
+            <div class="col-md-4 col-md-offset-4">
+                <form action="<% if(operation=='buy') { %>/add-buy<% } else { %>/add-sell<% }%>" method="POST">
+                    <div class="form-row">
+                        <div class="col-4"><label for="date">Data</label></div>
+                        <div class="col-12">
+                            <input class="form-control" type="text" id="date" name="date">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-4"><label for="quantity">Quantidade</label></div>
+                        <div class="col-12">
+                            <input class="form-control" type="number" id="quantity" name="quantity">
+                        </div>
+                    </div>                    
+                    <div class="form-row">
+                        <div class="col-4"><label for="price">Preço</label></div>
+                        <div class="col-12">
+                            <input class="form-control" type="number" step="0.01" id="price" name="price">
+                        </div>
+                    </div>                    
+                    <input type="hidden" value="<%= asset._id %>"name="assetId">                    
+                    <div class="btn-group">
+                        <button class="btn btn-success form-control rounded mt-2 me-2" action="submit">Salvar</button>
+                        <a href="/asset-detail/<%= asset._id %>" class="form-control btn btn-danger rounded mt-2 me-2">Cancelar</a>
+                                                 
+                        
+                    </div>                    
+                </form>
+            </div>    
+            <div class="col-md-4 col-md-offset-4"></div>
+        </div>  
+        
+    </div>    
+    
+    
+    
+<%- include('./includes/tail.ejs') %>

@@ -1,0 +1,13 @@
+<div>
+    <form action="/add-buy" method="post">
+        <div class="form-row">
+            <label class="col-1" for="date">Data</label>
+            <input class="col-2" type="text" name="date" id="date">
+            <label class="col-1" for="quantity">Quantidade</label>
+            <input class="col-1" type="number" name="quantity" id="quantity">
+            <label class="col-1" for="price">Preço</label>
+            <input class="col-1" type="number" name="price" id="price">
+            <input class="col-1 btn btn-success" type="submit" value="Salvar">
+        </div>
+    </form>
+</div>

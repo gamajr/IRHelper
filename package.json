@@ -1,0 +1,24 @@
+{
+  "name": "irhelper",
+  "version": "0.1.0",
+  "description": "IRHelper auxilia no preenchimento do IRPF nos itens relacionados à ações, BDRs e ETFs na Bolsa de Valores.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Oswaldo Gama Junior",
+  "license": "ISC",
+  "dependencies": {
+    "alphavantage": "^2.3.0",
+    "body-parser": "^1.20.0",
+    "bootstrap": "^5.1.3",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "mongodb": "^4.4.1",
+    "node-cron": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
